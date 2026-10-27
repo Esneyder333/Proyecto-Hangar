@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal de Suministros | El Hangar</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="pagina-terminal">
+
+<header class="encabezado">
+    <a class="marca" href="index.html">
+        <span class="marca-icono">✈</span>
+        <span>
+            <strong>EL HANGAR</strong>
+            <small>DONDE DESPEGA EL SABOR</small>
+        </span>
+    </a>
+
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a class="activo" href="productos.html">Suministros</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="acerca.html">Nosotros</a>
+        <a href="mapa.html">Ubicación</a>
+    </nav>
+</header>
+
+<main class="terminal-contenido">
+
+    <section class="terminal-titulo">
+        <span class="etiqueta">✦ CENTRO DE MANDO / SELECCIÓN</span>
+        <h1>Terminal de <span>Suministros</span></h1>
+        <p>Selecciona tu carga y prepara tu próximo pedido.</p>
+    </section>
+
+    <section class="catalogo-terminal">
+        <div class="terminal-barra">
+            <div>
+                <span class="texto-superior">INVENTARIO DISPONIBLE</span>
+                <h2>Selección de bebidas</h2>
+            </div>
+            <span class="sello">✈ EL HANGAR</span>
+        </div>
+
+        <p id="mensaje" role="status">Cargando suministros...</p>
+
+        <div id="lista-productos" class="lista-productos"></div>
+
+        <div class="estimado-carga">
+            <div>
+                <span>ESTIMADO DE CARGA</span>
+                <small id="cantidad-articulos">0 artículos seleccionados</small>
+            </div>
+            <strong id="total-catalogo">$0</strong>
+        </div>
+
+        <button type="button" id="pedir-ahora" class="boton-pedir">
+            PEDIR AHORA <span>↗</span>
+        </button>
+    </section>
+
+    <section id="ticket-pedido" class="ticket-seccion" hidden>
+        <div class="ticket">
+            <div class="ticket-cabecera">
+                <span class="ticket-logo">✈</span>
+                <div>
+                    <h2>EL HANGAR</h2>
+                    <p>TIQUETE DE SUMINISTROS</p>
+                </div>
+            </div>
+
+            <div class="ticket-linea"></div>
+
+            <span class="ticket-etiqueta">RESUMEN DE CARGA</span>
+            <h3>Detalle del pedido</h3>
+
+            <div id="detalle-ticket"></div>
+
+            <div class="ticket-linea"></div>
+
+            <div class="ticket-total">
+                <span>TOTAL DEL PEDIDO</span>
+                <strong id="total-ticket">$0</strong>
+            </div>
+
+            <label for="medio-pago">SELECCIONA EL MEDIO DE PAGO</label>
+            <select id="medio-pago">
+                <option value="Efectivo">Efectivo</option>
+                <option value="Transferencia">Transferencia</option>
+                <option value="Tarjeta">Tarjeta</option>
+            </select>
+
+            <button type="button" id="finalizar-pedido"
+                    class="boton-finalizar">
+                FINALIZAR PEDIDO ↗
+            </button>
+
+            <p class="ticket-nota">
+                Al continuar, se abrirá WhatsApp con los productos,
+                las cantidades, el total y el medio de pago elegido.
+            </p>
+        </div>
+    </section>
+
+    <div class="terminal-volver">
+        <a href="index.html" class="boton-volver">← VOLVER AL INICIO</a>
+    </div>
+
+</main>
+
+<footer>
+    <p>✈ EL HANGAR · Donde despega el sabor</p>
+    <small>© 2026 El Hangar. Todos los derechos reservados.</small>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>

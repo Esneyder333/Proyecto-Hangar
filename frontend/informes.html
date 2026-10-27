@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informes semanales | El Hangar</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .informe-contenido {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+            color: white;
+        }
+
+        .informe-contenido h1 span {
+            color: #f3af1a;
+        }
+
+        .informe-boton {
+            padding: 12px 20px;
+            margin: 10px 5px 10px 0;
+            background: #f3af1a;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .informe-resumen {
+            padding: 20px;
+            margin-top: 20px;
+            background: #202020;
+            border: 1px solid #f3af1a;
+            border-radius: 8px;
+        }
+
+        .tabla-contenedor {
+            overflow-x: auto;
+        }
+
+        .informe-tabla {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .informe-tabla th,
+        .informe-tabla td {
+            padding: 12px;
+            border-bottom: 1px solid #444;
+            text-align: left;
+        }
+
+        .informe-tabla th {
+            color: #f3af1a;
+        }
+
+        @media print {
+            header, footer, .informe-boton {
+                display: none !important;
+            }
+
+            body, .informe-contenido {
+                background: white !important;
+                color: black !important;
+            }
+
+            .informe-resumen {
+                background: white;
+                color: black;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header class="encabezado">
+    <a class="marca" href="index.html">
+        <span class="marca-icono">✈</span>
+        <span>
+            <strong>EL HANGAR</strong>
+            <small>DONDE DESPEGA EL SABOR</small>
+        </span>
+    </a>
+
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="productos.html">Suministros</a>
+        <a href="informes.html">Informes</a>
+    </nav>
+</header>
+
+<main class="informe-contenido">
+    <h1>Informe semanal de <span>ventas</span></h1>
+    <p>Consulta las ventas registradas durante los últimos siete días.</p>
+
+    <button class="informe-boton" id="actualizar-informe">
+        ACTUALIZAR INFORME
+    </button>
+
+    <button class="informe-boton" onclick="window.print()">
+        IMPRIMIR INFORME
+    </button>
+
+    <p id="estado-informe">Presiona actualizar para consultar los datos.</p>
+
+    <section class="informe-resumen">
+        <h2>Resumen de la semana</h2>
+        <p>Total de ventas: <strong id="numero-ventas">0</strong></p>
+        <p>Dinero vendido: <strong id="dinero-vendido">$0</strong></p>
+    </section>
+
+    <h2>Detalle de ventas</h2>
+
+    <div class="tabla-contenedor">
+        <table class="informe-tabla">
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Número de venta</th>
+                    <th>Productos</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody id="tabla-ventas">
+                <tr>
+                    <td colspan="4">Sin datos consultados.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<footer>
+    <p>EL HANGAR · Donde despega el sabor</p>
+</footer>
+
+<script>
+async function cargarInforme() {
+    const estado = document.getElementById("estado-informe");
+    const tabla = document.getElementById("tabla-ventas");
+
+    estado.textContent = "Consultando ventas...";
+
+    try {
+        const respuesta = await fetch("../api/informe_semanal.php");
+        const datos = await respuesta.json();
+
+        if (!respuesta.ok || datos.error) {
+            throw new Error(datos.error || "Error al consultar el informe.");
+        }
+
+        document.getElementById("numero-ventas").textContent =
+            datos.total_ventas;
+
+        document.getElementById("dinero-vendido").textContent =
+            "$" + Number(datos.dinero_vendido).toLocaleString("es-CO");
+
+        tabla.innerHTML = "";
+
+        if (datos.ventas.length === 0) {
+            tabla.innerHTML =
+                '<tr><td colspan="4">No hay ventas registradas en los últimos siete días.</td></tr>';
+        } else {
+            datos.ventas.forEach(function(venta) {
+                const fila = document.createElement("tr");
+
+                const fecha = document.createElement("td");
+                fecha.textContent = venta.fecha;
+
+                const id = document.createElement("td");
+                id.textContent = "#" + venta.id;
+
+                const productos = document.createElement("td");
+                productos.textContent = venta.productos;
+
+                const total = document.createElement("td");
+                total.textContent =
+                    "$" + Number(venta.total).toLocaleString("es-CO");
+
+                fila.append(fecha, id, productos, total);
+                tabla.appendChild(fila);
+            });
+        }
+
+        estado.textContent = "Informe actualizado correctamente.";
+
+    } catch (error) {
+        console.error(error);
+        estado.textContent = error.message;
+    }
+}
+
+document.getElementById("actualizar-informe")
+    .addEventListener("click", cargarInforme);
+
+cargarInforme();
+</script>
+
+</body>
+</html>

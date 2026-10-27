@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu pedido | El Hangar</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="encabezado">
+    <a class="marca" href="index.html">
+        <span class="marca-icono">✈</span>
+        <span><strong>EL HANGAR</strong><small>DONDE DESPEGA EL SABOR</small></span>
+    </a>
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="productos.html">Productos</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="acerca.html">Nosotros</a>
+        <a href="mapa.html">Ubicación</a>
+    </nav>
+</header>
+
+<main>
+    <section class="cabecera-pagina">
+        <span class="etiqueta">ZONA DE EMBARQUE · 02</span>
+        <h1>Tu pedido está <span>en ruta.</span></h1>
+        <p>Revisa tu selección antes de confirmar la venta.</p>
+    </section>
+
+    <section class="contenedor carrito-layout">
+        <div class="carrito-principal">
+            <div class="titulo-carrito">
+                <div>
+                    <span class="texto-superior">RESUMEN DEL PEDIDO</span>
+                    <h2>Productos seleccionados</h2>
+                </div>
+                <a class="enlace-volver" href="productos.html">← Seguir comprando</a>
+            </div>
+
+            <div id="resumen-carrito"></div>
+
+            <div class="volver-catalogo">
+                <a href="productos.html">+ Agregar más productos</a>
+            </div>
+        </div>
+
+        <aside class="resumen-pago">
+            <span class="texto-superior">CENTRO DE PAGO</span>
+            <h2>Resumen de compra</h2>
+
+            <div class="fila-resumen">
+                <span>Estado</span>
+                <strong>Pedido pendiente</strong>
+            </div>
+
+            <div class="separador"></div>
+
+            <div class="total-label">TOTAL DEL PEDIDO</div>
+            <div id="total-carrito">$0</div>
+
+            <label for="metodo-pago">Método de pago</label>
+            <select id="metodo-pago">
+                <option value="Efectivo">Efectivo</option>
+                <option value="Transferencia">Transferencia</option>
+            </select>
+
+            <button id="confirmar-venta" class="boton-confirmar" type="button">
+                CONFIRMAR PEDIDO ↗
+            </button>
+
+            <button id="vaciar-carrito" class="boton-vaciar" type="button">
+                Vaciar carrito
+            </button>
+
+            <p class="nota-pago">Verifica las cantidades antes de confirmar. La venta se registrará cuando el servidor la acepte.</p>
+            <p id="mensaje" role="status" aria-live="polite"></p>
+        </aside>
+    </section>
+</main>
+
+<footer>
+    <p>✈ EL HANGAR · Donde despega el sabor</p>
+    <small>© 2026 El Hangar. Todos los derechos reservados.</small>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>
